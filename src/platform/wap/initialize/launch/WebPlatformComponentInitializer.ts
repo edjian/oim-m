@@ -4,6 +4,12 @@ import Prompter from '@/app/com/client/component/Prompter';
 import WebPromptHandlerImpl from '@/platform/wap/impl/WebPromptHandlerImpl';
 import WorkViewEnum from '@/app/com/common/view/WorkViewEnum';
 import WebPlatformFileIconInitializer from '@/platform/common/web/initialize/launch/more/WebPlatformFileIconInitializer';
+import WapUserChatViewImpl from '@/platform/wap/impl/view/WapUserChatViewImpl';
+import WapGroupChatViewImpl from '@/platform/wap/impl/view/WapGroupChatViewImpl';
+import WapContactInfoViewImpl from '@/platform/wap/impl/view/WapContactInfoViewImpl';
+import WapGroupInfoViewImpl from '@/platform/wap/impl/view/WapGroupInfoViewImpl';
+import ContactListPaneViewImpl from '@/platform/vue/view/impl/ContactListPaneViewImpl';
+import ContactListPaneViewAppImpl from '@/platform/wap/impl/view/ContactListPaneViewAppImpl';
 
 export default class WebPlatformComponentInitializer implements Initializer {
 
@@ -24,6 +30,12 @@ export default class WebPlatformComponentInitializer implements Initializer {
     }
 
     public initializeView(appContext: AppContext) {
+
+        appContext.putViewImpl(WorkViewEnum.ContactListPaneView, ContactListPaneViewAppImpl);
+        appContext.putViewImpl(WorkViewEnum.UserChatView, WapUserChatViewImpl);
+        appContext.putViewImpl(WorkViewEnum.GroupChatView, WapGroupChatViewImpl);
+        appContext.putViewImpl(WorkViewEnum.ContactInfoView, WapContactInfoViewImpl);
+        appContext.putViewImpl(WorkViewEnum.GroupInfoView, WapGroupInfoViewImpl);
         // appContext.putViewImpl(WorkViewEnum.MessageAllUnreadView, MessageAllUnreadViewImpl);
         // appContext.putViewImpl(WorkViewEnum.GroupInviteApplyListView, GroupInviteApplyListViewImpl);
         // appContext.putViewImpl(WorkViewEnum.GroupInviteeApplyListView, GroupInviteeApplyListViewImpl);

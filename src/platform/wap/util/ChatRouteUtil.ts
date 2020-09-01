@@ -10,6 +10,12 @@ class ChatRouteUtil {
         router.push(route).then((r) => {
         });
     }
+
+    public static isUserChat(): boolean {
+        const path = '/chat.user';
+        const fullPath = (router.app && router.app.$route) ? router.app.$route.fullPath : '';
+        return fullPath === path;
+    }
 }
 
 export default ChatRouteUtil;

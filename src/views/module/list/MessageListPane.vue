@@ -1,16 +1,10 @@
 <template>
     <div>
         <v-app-bar
-                dark
-                color="primary"
+            dark
+            dense
+            color="deep-purple primary"
         >
-            <template v-slot:img="{ props }">
-                <v-img
-                        v-bind="props"
-                        gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
-                ></v-img>
-            </template>
-
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
             <v-toolbar-title>消息</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -91,20 +85,20 @@ export default class MessageListPane extends Vue {
 
 <style lang="scss">
 .no-message {
-  text-align: center;
-  /*position: relative;*/
+    text-align: center;
+    /*position: relative;*/
 
-  > div {
-    position: absolute;
-    width: 100%;
-    /*height: 180px;*/
-    top: calc(50% - 100px);
-    left: 0;
-  }
+    > div {
+        position: absolute;
+        width: 100%;
+        /*height: 180px;*/
+        top: calc(50% - 100px);
+        left: 0;
+    }
 
-  h4 {
-    margin: 0;
-    color: #818181;
-  }
+    h4 {
+        margin: 0;
+        color: #818181;
+    }
 }
 </style>

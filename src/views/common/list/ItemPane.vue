@@ -9,7 +9,7 @@
             <i :class="data.red?'icon red-dot-middle':''">{{data.redCount>0?data.redCount:''}}</i>
         </div>
 
-        <div class="info">
+        <div class="center">
             <h3 class="nickname">
                 <span class="nickname-text">{{data.name}}</span>
             </h3>

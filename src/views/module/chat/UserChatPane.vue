@@ -1,29 +1,29 @@
 <template>
     <div class="chat-pane">
         <v-card
-                class="mx-auto"
-                elevation="8"
-                dark
-                color="primary"
+            class="mx-auto"
+            elevation="8"
+            dark
+            color="primary"
         >
             <div>
                 <v-list-item
-                        @click=""
+                    @click=""
                 >
                     <back-button></back-button>
-                    <v-toolbar-title>{{model.info.name}}</v-toolbar-title>
+                    <v-toolbar-title>{{ model.info.name }}</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-menu offset-y>
                         <template v-slot:activator="{ on }">
                             <v-btn
-                                    v-on="on"
-                                    icon>
+                                v-on="on"
+                                icon>
                                 <v-icon>mdi-dots-vertical</v-icon>
                             </v-btn>
                         </template>
                         <v-list>
                             <v-list-item
-                                    @click="openHistory"
+                                @click="openHistory"
                             >
                                 <v-list-item-title>聊天记录</v-list-item-title>
                             </v-list-item>
@@ -46,9 +46,9 @@
         </div>
         <div class="bottom">
             <write-pane
-                    :data="writeMapper"
-                    @on-send="send"
-                    @on-key-press='onKeyPress'>
+                :data="writeMapper"
+                @on-send="send"
+                @on-key-press='onKeyPress'>
 
             </write-pane>
             <!--                <span class="btn-mic"><i :class="'icon icon-' "></i></span>-->
@@ -60,150 +60,153 @@
 </template>
 
 <script lang="ts">
-    import {Component, Emit, Inject, Model, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
-    import BackButton from '@/views/module/common/BackButton.vue';
-    import WritePane from '@/views/component/chat/WritePane.vue';
-    import ReadPane from '@/views/component/chat/ReadPane.vue';
+import {Component, Emit, Inject, Model, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
+import BackButton from '@/views/module/common/BackButton.vue';
+import WritePane from '@/views/component/chat/WritePane.vue';
+import ReadPane from '@/views/component/chat/ReadPane.vue';
 
-    import userChatViewModel from '@/platform/vue/view/model/UserChatViewModel';
-    import app from '@/app/App';
-    import ContentBuildUtil from '@/platform/wap/util/ContentBuildUtil';
-    import Prompt from '@/platform/wap/common/Prompt';
-    import BaseUtil from '@/app/lib/util/BaseUtil';
-    import ReadMapper from '@/views/component/chat/ReadMapper';
-    import WriteMapper from '@/views/component/chat/WriteMapper';
-    import ChatWriteViewEntity from '@/platform/vue/view/entity/ChatWriteViewEntity';
-    import ChatReadViewEntityDefaultImpl from '@/platform/vue/view/entity/impl/ChatReadViewEntityDefaultImpl';
-    import ChatWriteViewEntityDefaultImpl from '@/platform/vue/view/entity/impl/ChatWriteViewEntityDefaultImpl';
-    import ChatReadViewEntity from '@/platform/vue/view/entity/ChatReadViewEntity';
-    import Content from '@/app/com/common/chat/Content';
-    import CoreContentUtil from '@/app/com/common/chat/util/CoreContentUtil';
-    import RouterUtil from '@/common/vue/RouterUtil';
-    import PromptType from '@/app/com/client/define/prompt/PromptType';
-    @Component({
-        components: {
-            BackButton,
-            WritePane,
-            ReadPane,
-        },
-    })
-    export default class UserChatPane extends Vue {
-        private model = userChatViewModel;
-        private readMapper: ReadMapper = new ReadMapper();
-        private writeMapper: WriteMapper = new WriteMapper();
+import userChatViewModel from '@/platform/vue/view/model/UserChatViewModel';
+import app from '@/app/App';
+import ContentBuildUtil from '@/platform/wap/util/ContentBuildUtil';
+import Prompt from '@/platform/wap/common/Prompt';
+import BaseUtil from '@/app/lib/util/BaseUtil';
+import ReadMapper from '@/views/component/chat/ReadMapper';
+import WriteMapper from '@/views/component/chat/WriteMapper';
+import ChatWriteViewEntity from '@/platform/vue/view/entity/ChatWriteViewEntity';
+import ChatReadViewEntityDefaultImpl from '@/platform/vue/view/entity/impl/ChatReadViewEntityDefaultImpl';
+import ChatWriteViewEntityDefaultImpl from '@/platform/vue/view/entity/impl/ChatWriteViewEntityDefaultImpl';
+import ChatReadViewEntity from '@/platform/vue/view/entity/ChatReadViewEntity';
+import Content from '@/app/com/common/chat/Content';
+import CoreContentUtil from '@/app/com/common/chat/util/CoreContentUtil';
+import RouterUtil from '@/common/vue/RouterUtil';
+import PromptType from '@/app/com/client/define/prompt/PromptType';
 
-        private text: string = '';
-        private isLoading: boolean = false;
+@Component({
+    components: {
+        BackButton,
+        WritePane,
+        ReadPane,
+    },
+})
+export default class UserChatPane extends Vue {
+    private model = userChatViewModel;
+    private readMapper: ReadMapper = new ReadMapper();
+    private writeMapper: WriteMapper = new WriteMapper();
 
-        public mounted() {
-            this.initialize();
+    private text: string = '';
+    private isLoading: boolean = false;
 
-            const own = this;
+    public mounted() {
+        this.initialize();
 
-            const model = this.model;
-            const readMapper = this.readMapper;
-            const writeMapper = this.writeMapper;
+        const own = this;
 
-            const readViewEntity: ChatReadViewEntity = {
-                setScrollTop(size: number) {
-                    readMapper.setScrollTop(size);
-                },
-                getScrollHeight(): number {
-                    return readMapper.getScrollHeight();
-                },
-                updateScrollIntoView(viewId: string): void {
-                    readMapper.updateScrollIntoView(viewId);
-                },
-            } as ChatReadViewEntityDefaultImpl;
-            const writeViewEntity: ChatWriteViewEntity = {
-                setInnerHTML(html: string) {
-                    writeMapper.setInnerHTML(html);
-                },
-                getInnerHTML() {
-                    return writeMapper.getInnerHTML();
-                },
-            } as ChatWriteViewEntityDefaultImpl;
-            model.setReadViewEntity(readViewEntity);
-            model.setWriteViewEntity(writeViewEntity);
-            model.setOnKeyChange((key: string) => {
-                // no
-            });
+        const model = this.model;
+        const readMapper = this.readMapper;
+        const writeMapper = this.writeMapper;
+
+        const readViewEntity: ChatReadViewEntity = {
+            setScrollTop(size: number) {
+                readMapper.setScrollTop(size);
+            },
+            getScrollHeight(): number {
+                return readMapper.getScrollHeight();
+            },
+            updateScrollIntoView(viewId: string): void {
+                readMapper.updateScrollIntoView(viewId);
+            },
+        } as ChatReadViewEntityDefaultImpl;
+        const writeViewEntity: ChatWriteViewEntity = {
+            setInnerHTML(html: string) {
+                writeMapper.setInnerHTML(html);
+            },
+            getInnerHTML() {
+                return writeMapper.getInnerHTML();
+            },
+        } as ChatWriteViewEntityDefaultImpl;
+        model.setReadViewEntity(readViewEntity);
+        model.setWriteViewEntity(writeViewEntity);
+        model.setOnKeyChange((key: string) => {
+            // no
+        });
+    }
+
+    private initialize() {
+        const own = this;
+    }
+
+    private onKeyPress() {
+        const own = this;
+        const model = this.model;
+        const writeMapper = this.writeMapper;
+        model.viewData.data.html = writeMapper.getInnerHTML();
+    }
+
+
+    private onRefresh() {
+        const own = this;
+        own.loadHistory();
+        setTimeout(() => {
+            own.isLoading = false;
+        }, 1000);
+    }
+
+    private handleScroll(info: { event: Event, scrollHeight: number, scrollTop: number, scrollPosition: string }) {
+        const own = this;
+        const model = this.model;
+        if (info) {
+            model.viewData.data.scrollHeight = info.scrollHeight;
+            model.viewData.data.scrollTop = info.scrollTop;
+            model.viewData.data.scrollPosition = info.scrollPosition;
         }
+    }
 
-        private initialize() {
-            const own = this;
+    private loadHistory() {
+        userChatViewModel.loadHistory();
+    }
+
+    private toMessageKeyView(messageKey: string) {
+        if (messageKey) {
+            this.readMapper.updateScrollIntoView(messageKey);
         }
-
-        private onKeyPress() {
-            const own = this;
-            const model = this.model;
-            const writeMapper = this.writeMapper;
-            model.viewData.data.html = writeMapper.getInnerHTML();
-        }
+    }
 
 
-        private onRefresh() {
-            const own = this;
-            own.loadHistory();
-            setTimeout(() => {
-                own.isLoading = false;
-            }, 1000);
-        }
+    public openHistory() {
+        RouterUtil.toByPath('/chat.group.history');
+    }
 
-        private handleScroll(info: { event: Event, scrollHeight: number, scrollTop: number, scrollPosition: string }) {
-            const own = this;
-            const model = this.model;
-            if (info) {
-                model.viewData.data.scrollHeight = info.scrollHeight;
-                model.viewData.data.scrollTop = info.scrollTop;
-                model.viewData.data.scrollPosition = info.scrollPosition;
+    private send(content: Content) {
+        const model = this.model;
+        const data = this;
+        if (content) {
+            const text = CoreContentUtil.getText(content);
+            const itemSize = CoreContentUtil.getItemSize(content);
+            if (text.length > 10000 || itemSize > 1000) {
+                app.prompt('内容过长！', '警告', PromptType.warn);
             }
-        }
-
-        private loadHistory() {
-            userChatViewModel.loadHistory();
-        }
-
-        private toMessageKeyView(messageKey: string) {
-            if (messageKey) {
-                this.readMapper.updateScrollIntoView(messageKey);
-            }
-        }
-
-
-        public openHistory() {
-            RouterUtil.toByPath('/chat.group.history');
-        }
-
-        private send(content: Content) {
-            const model = this.model;
-            const data = this;
-            if (content) {
-                const text = CoreContentUtil.getText(content);
-                const itemSize = CoreContentUtil.getItemSize(content);
-                if (text.length > 10000 || itemSize > 1000) {
-                    app.prompt('内容过长！', '警告', PromptType.warn);
-                }
-                if (itemSize === 0) {
-                    data.writeMapper.setInnerHTML('');
-                    data.writeMapper.keepCursorLastIndex();
-                    model.viewData.data.html = '';
-                } else {
-                    model.send(content, (success, message) => {
-                        if (!success) {
-                            app.prompt(message, '警告', PromptType.warn);
-                        } else {
-                            data.writeMapper.setInnerHTML('');
-                            data.writeMapper.keepCursorLastIndex();
-                            model.viewData.data.html = '';
-                        }
-                    });
-                }
+            if (itemSize === 0) {
+                data.writeMapper.setInnerHTML('');
+                data.writeMapper.keepCursorLastIndex();
+                model.viewData.data.html = '';
+            } else {
+                model.send(content, (success, message) => {
+                    if (!success) {
+                        app.prompt(message, '警告', PromptType.warn);
+                    } else {
+                        data.writeMapper.setInnerHTML('');
+                        data.writeMapper.keepCursorLastIndex();
+                        model.viewData.data.html = '';
+                    }
+                });
             }
         }
     }
+}
 </script>
 
 <style lang="scss">
-
+.chat-pane {
+    height: 100%;
+}
 </style>

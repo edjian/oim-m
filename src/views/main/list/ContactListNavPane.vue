@@ -97,7 +97,7 @@
     import contactNavActive from '@/views/main/list/ContactNavActive';
 
     import ContactAllListPane from '@/views/main/list/ContactAllListPane.vue';
-    import UserListPane from '@/views/main/list/UserListPane.vue';
+    import UserListPane from '@/views/main/list/ContactListPane.vue';
     import GroupListPane from '@/views/main/list/GroupListPane.vue';
 
     @Component({
