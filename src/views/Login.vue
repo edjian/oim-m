@@ -6,25 +6,25 @@
         </div>
         <div v-show="!model.hasLogin">
             <v-form
-                    ref="form"
-                    lazy-validation>
+                ref="form"
+                lazy-validation>
                 <v-text-field
-                        v-model="model.data.account"
-                        :counter="16"
-                        :rules="rules.accountRule"
-                        :label="''"
-                        :placeholder="'账号'"
-                        required
+                    v-model="model.data.account"
+                    :counter="20"
+                    :rules="rules.accountRule"
+                    :label="''"
+                    :placeholder="'账号'"
+                    required
                 ></v-text-field>
 
                 <v-text-field
-                        v-model="model.data.password"
-                        type="password"
-                        :counter="16"
-                        :label="''"
-                        :rules="rules.passwordRule"
-                        :placeholder="'密码'"
-                        required
+                    v-model="model.data.password"
+                    type="password"
+                    :counter="20"
+                    :label="''"
+                    :rules="rules.passwordRule"
+                    :placeholder="'密码'"
+                    required
                 ></v-text-field>
             </v-form>
             <div class="login-button">
@@ -35,7 +35,7 @@
                     <a @click="register" class="login-register" href="javascript:">立即注册</a>
                 </div>
                 <div style="float: right;">
-<!--                    <a @click="resetPassword" class="login-forget" href="javascript:">忘记密码？</a>|-->
+                    <!--                    <a @click="resetPassword" class="login-forget" href="javascript:">忘记密码？</a>|-->
                     <a @click="setting" class="login-forget" href="javascript:">设置</a>
                 </div>
             </div>
@@ -44,8 +44,8 @@
 
         <!--        </v-parallax>-->
         <v-dialog
-                v-model="settingDialog"
-                max-width="500px"
+            v-model="settingDialog"
+            max-width="500px"
         >
             <v-card>
                 <v-card-title>
@@ -53,22 +53,22 @@
                 </v-card-title>
                 <v-card-text>
                     <v-text-field
-                            v-model="serverUrl"
-                            :placeholder="'服务器地址'"
-                            required
+                        v-model="serverUrl"
+                        :placeholder="'服务器地址'"
+                        required
                     ></v-text-field>
                 </v-card-text>
                 <v-card-actions>
                     <v-btn
-                            text
-                            @click="settingDialog = false"
+                        text
+                        @click="settingDialog = false"
                     >
                         取消
                     </v-btn>
                     <v-btn
-                            color="primary"
-                            text
-                            @click="saveSetting"
+                        color="primary"
+                        text
+                        @click="saveSetting"
                     >
                         确定
                     </v-btn>
@@ -100,11 +100,11 @@ export default class Login extends Vue {
     private rules = {
         accountRule: [
             (v: any) => !!v || '用户名不能为空',
-            (v: string) => (/^[\S]{4,16}$/.test(v) || '4-16位'),
+            (v: string) => (/^[\S]{4,20}$/.test(v) || '4-20位'),
         ],
         passwordRule: [
             (v: any) => !!v || '密码不能为空',
-            (v: string) => (/^[\S]{6,16}$/.test(v) || '6-16位'),
+            (v: string) => (/^[\S]{6,20}$/.test(v) || '6-20位'),
         ],
     };
     public onLogin: (success: boolean, message?: string) => void = (
@@ -179,7 +179,8 @@ export default class Login extends Vue {
 
     private toMain(): void {
         // history.replaceState()
-        location.replace('/#/main')
+        // location.replace('/#/main')
+        this.$router.replace('/main');
         // this.$router.push({path: '/main'});
     }
 
@@ -192,80 +193,80 @@ export default class Login extends Vue {
 
 <style lang="scss">
 .login-pane {
-  width: 100%;
-  /*height: 100%;*/
-  overflow-y: auto;
+    width: 100%;
+    /*height: 100%;*/
+    overflow-y: auto;
 
-  .login-logo {
-    margin: 50px auto;
-    text-align: center;
+    .login-logo {
+        margin: 50px auto;
+        text-align: center;
 
-    img {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-    }
-  }
-
-  form {
-    margin: auto;
-    width: 80%;
-  }
-
-  .login-button {
-    width: 80%;
-    padding-top: 20px;
-    margin: auto;
-
-    button {
-      width: 100%;
-      margin: 0;
+        img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+        }
     }
 
-    > h3 {
-      margin: 20px 0 0 0;
-      text-align: center;
-
-      a {
-        text-decoration: none;
-      }
+    form {
+        margin: auto;
+        width: 80%;
     }
-  }
 
-  .login-bottom {
-    width: 80%;
-    padding-top: 10px;
-    /*margin: auto;*/
-    margin: 20px auto;
+    .login-button {
+        width: 80%;
+        padding-top: 20px;
+        margin: auto;
 
-    > h3 {
-      margin: 20px 0 0 0;
-      text-align: center;
+        button {
+            width: 100%;
+            margin: 0;
+        }
 
-      a {
-        text-decoration: none;
-      }
+        > h3 {
+            margin: 20px 0 0 0;
+            text-align: center;
+
+            a {
+                text-decoration: none;
+            }
+        }
     }
-  }
 
-  /*.login-register {*/
-  /*    width: 50%;*/
-  /*    font-size: 14px;*/
-  /*    line-height: 1.5;*/
-  /*    color: #333333;*/
-  /*    text-transform: uppercase;*/
-  /*}*/
+    .login-bottom {
+        width: 80%;
+        padding-top: 10px;
+        /*margin: auto;*/
+        margin: 20px auto;
 
-  /*.login-forget {*/
-  /*    width: 50%;*/
-  /*    font-size: 15px;*/
-  /*    line-height: 1.5;*/
-  /*    color: #fafafa;*/
-  /*    text-transform: uppercase;*/
-  /*}*/
+        > h3 {
+            margin: 20px 0 0 0;
+            text-align: center;
+
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+
+    /*.login-register {*/
+    /*    width: 50%;*/
+    /*    font-size: 14px;*/
+    /*    line-height: 1.5;*/
+    /*    color: #333333;*/
+    /*    text-transform: uppercase;*/
+    /*}*/
+
+    /*.login-forget {*/
+    /*    width: 50%;*/
+    /*    font-size: 15px;*/
+    /*    line-height: 1.5;*/
+    /*    color: #fafafa;*/
+    /*    text-transform: uppercase;*/
+    /*}*/
 }
 
 .login-pane::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 </style>

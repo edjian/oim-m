@@ -7,13 +7,13 @@ export default class WapGroupInfoViewImpl extends GroupInfoViewImpl {
 
     public setVisible(visible: boolean): void {
         if (visible) {
-            const path = '/info.group/';
+            const path = '/group.info/';
             RouterUtil.toByPath(path);
         }
     }
 
     public isVisible(): boolean {
-        const path = '/info.group/';
+        const path = '/group.info/';
         return RouterUtil.isPath(path);
     }
 }

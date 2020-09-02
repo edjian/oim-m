@@ -45,9 +45,9 @@ class RouteConfigBox {
                 component: () => import('@/views/main/query/QueryPane.vue'),
             },
             {
-                path: '/query.user',
-                name: 'userQuery',
-                component: () => import('@/views/module/query/UserQueryPane.vue'),
+                path: '/user.find',
+                name: 'userFind',
+                component: () => import('@/views/module/user/find/UserFindPane.vue'),
             },
             {
                 path: '/chat.user',
@@ -70,23 +70,36 @@ class RouteConfigBox {
                 component: () => import('@/views/module/chat/GroupChatHistoryPane.vue'),
             },
             {
-                path: '/info.user/:userId',
+                path: '/contact.info/:userId',
                 name: 'userInfo',
                 component: () => import('@/views/module/contact/info/ContactInfoViewPane.vue'),
                 props: true,
             },
             {
-                path: '/info.group/:groupId',
+                path: '/group.info/:groupId',
                 name: 'groupInfo',
                 component: () => import('@/views/module/group/info/GroupInfoViewPane.vue'),
                 props: true,
             },
             {
-                path: '/info.group.member.list/:groupId',
+                path: '/group.info.member.list/:groupId',
                 name: 'groupMemberList',
                 component: () => import('@/views/module/group/member/GroupMemberListPane.vue'),
                 props: true,
             },
+            {
+                path: '/group.find',
+                name: 'groupFind',
+                component: () => import('@/views/module/group/find/GroupFindPane.vue'),
+                props: true,
+            },
+            {
+                path: '/notice.contact.add.apply.list',
+                name: 'noticeContactAddApplyList',
+                component: () => import('@/views/module/notice/ContactAddApplyListPane.vue'),
+                props: true,
+            },
+
         ];
         this.initialize();
     }

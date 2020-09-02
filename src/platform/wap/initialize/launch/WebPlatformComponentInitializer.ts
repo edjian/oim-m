@@ -10,6 +10,7 @@ import WapContactInfoViewImpl from '@/platform/wap/impl/view/WapContactInfoViewI
 import WapGroupInfoViewImpl from '@/platform/wap/impl/view/WapGroupInfoViewImpl';
 import ContactListPaneViewImpl from '@/platform/vue/view/impl/ContactListPaneViewImpl';
 import ContactListPaneViewAppImpl from '@/platform/wap/impl/view/ContactListPaneViewAppImpl';
+import WapMessageAllUnreadViewImpl from '@/platform/wap/impl/view/WapMessageAllUnreadViewImpl';
 
 export default class WebPlatformComponentInitializer implements Initializer {
 
@@ -36,7 +37,7 @@ export default class WebPlatformComponentInitializer implements Initializer {
         appContext.putViewImpl(WorkViewEnum.GroupChatView, WapGroupChatViewImpl);
         appContext.putViewImpl(WorkViewEnum.ContactInfoView, WapContactInfoViewImpl);
         appContext.putViewImpl(WorkViewEnum.GroupInfoView, WapGroupInfoViewImpl);
-        // appContext.putViewImpl(WorkViewEnum.MessageAllUnreadView, MessageAllUnreadViewImpl);
+        appContext.putViewImpl(WorkViewEnum.MessageAllUnreadView, WapMessageAllUnreadViewImpl);
         // appContext.putViewImpl(WorkViewEnum.GroupInviteApplyListView, GroupInviteApplyListViewImpl);
         // appContext.putViewImpl(WorkViewEnum.GroupInviteeApplyListView, GroupInviteeApplyListViewImpl);
         // appContext.putViewImpl(WorkViewEnum.GroupJoinApplyListView, GroupJoinApplyListViewImpl);

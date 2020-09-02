@@ -257,7 +257,7 @@ export default class GroupInfoCard extends Vue {
 
     private openMemberList() {
         const groupId = this.groupId;
-        const path = '/info.group.member.list/' + groupId;
+        const path = '/group.info.member.list/' + groupId;
         RouterUtil.toByPath(path);
     }
 }

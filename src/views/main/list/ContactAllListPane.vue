@@ -35,7 +35,7 @@ export default class ContactAllListPane extends Vue {
 
     private onOpenSend(data: ItemData) {
         // TODO
-        const path = '/info.user/' + data.key;
+        const path = '/contact.info/' + data.key;
         RouterUtil.toByPath(path);
     }
 

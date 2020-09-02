@@ -40,7 +40,7 @@
         @Emit('on-item-selected')
         private onItemSelected(data: ItemData) {
             // TODO
-            const path = '/info.user/' + data.key;
+            const path = '/contact.info/' + data.key;
             RouterUtil.toByPath(path);
         }
 

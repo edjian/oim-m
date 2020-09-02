@@ -47,8 +47,8 @@
 <script lang="ts">
     import {Component, Emit, Inject, Model, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
     import BackButton from '@/views/module/common/BackButton.vue';
-    import UserQueryPane from '@/views/module/query/UserQueryPane.vue';
-    import GroupQueryPane from '@/views/module/query/GroupQueryPane.vue';
+    import UserQueryPane from '@/views/module/user/find/UserFindPane.vue';
+    import GroupQueryPane from '@/views/module/group/find/GroupFindPane.vue';
 
     @Component({
         components: {
