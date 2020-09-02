@@ -25,6 +25,12 @@
                 dense
         >
             <v-col>
+                <v-list-item link @click="updatePassword">
+                    <v-list-item-icon>
+                        <v-icon>mdi-lock-reset</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>修改密码</v-list-item-title>
+                </v-list-item>
                 <v-list-item link @click="exit">
                     <v-list-item-icon>
                         <v-icon>exit_to_app</v-icon>
@@ -57,6 +63,10 @@ export default class ProfilePane extends Vue {
 
     private personal() {
         RouterUtil.toByPath('/personal.info');
+    }
+
+    private updatePassword() {
+        RouterUtil.toByPath('/personal.update.password');
     }
 }
 </script>

@@ -4,8 +4,7 @@
             <pre ref='inputArea' class="message-input" @paste.capture.prevent=""
                  @keypress="onKeypress"
                  @keyup="onKeyup"
-                 contenteditable="true">
-            </pre>
+                 contenteditable="true"></pre>
         </div>
 
         <v-btn class="button-send" small @click="send">{{ '发送' }}</v-btn>

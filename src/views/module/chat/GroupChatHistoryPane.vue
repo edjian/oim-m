@@ -11,7 +11,7 @@
                         @click=""
                 >
                     <back-button></back-button>
-                    <v-toolbar-title>{{chatData.name}}</v-toolbar-title>
+                    <v-toolbar-title>{{ chatViewModel.info.name }}</v-toolbar-title>
                     <v-spacer></v-spacer>
                 </v-list-item>
             </div>
@@ -33,60 +33,71 @@
 </template>
 
 <script lang="ts">
-    import {Component, Emit, Inject, Model, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
-    import BackButton from '@/views/module/common/BackButton.vue';
-    import ReadPane from '@/views/component/chat/ReadPane.vue';
+import {Component, Emit, Inject, Model, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
+import BackButton from '@/views/module/common/BackButton.vue';
+import ReadPane from '@/views/component/chat/ReadPane.vue';
 
-    import app from '@/app/App';
-    import Page from '@/app/com/common/data/Page';
-    import GroupChatQuery from '@/app/com/main/module/business/chat/data/GroupChatQuery';
-    import PersonalBox from '@/app/com/main/module/business/personal/box/PersonalBox';
-    import GroupChatDataController from '@/app/com/main/module/business/chat/controller/GroupChatDataController';
-    import MessageContentWrap from '@/common/vue/data/content/impl/message/MessageContentWrap';
+import app from '@/app/App';
+import Page from '@/app/com/common/data/Page';
+import GroupChatQuery from '@/app/com/main/module/business/chat/data/GroupChatQuery';
+import PersonalBox from '@/app/com/main/module/business/personal/box/PersonalBox';
+import GroupChatDataController from '@/app/com/main/module/business/chat/controller/GroupChatDataController';
+import MessageContentWrap from '@/common/vue/data/content/impl/message/MessageContentWrap';
 
-    import groupChatViewModel from '@/platform/vue/view/model/GroupChatViewModel';
-    @Component({
-        components: {
-            BackButton,
-            ReadPane,
-        },
-    })
-    export default class UserChatHistoryPane extends Vue {
+import groupChatViewModel from '@/platform/vue/view/model/GroupChatViewModel';
+import ContentItemHandleService from '@/common/web/content/service/ContentItemHandleService';
+import ContentWrapUtil from '@/common/vue/data/content/util/ContentWrapUtil';
 
-        private list: MessageContentWrap[] = [];
-        private page: Page = new Page();
-        private query: GroupChatQuery = new GroupChatQuery();
-        private chatData = groupChatViewModel.viewData;
+@Component({
+    components: {
+        BackButton,
+        ReadPane,
+    },
+})
+export default class UserChatHistoryPane extends Vue {
 
-        public mounted() {
-            this.queryList();
-        }
+    private chatViewModel = groupChatViewModel;
+    private list: MessageContentWrap[] = [];
+    private page: Page = new Page();
+    private query: GroupChatQuery = new GroupChatQuery();
+    private chatData = groupChatViewModel.viewData;
 
-        public pageChange() {
-            this.queryList();
-        }
-
-        public queryList() {
-            const own = this;
-            const page = this.page;
-            const query: GroupChatQuery = this.query;
-            const pb: PersonalBox = app.appContext.getMaterial(PersonalBox);
-            const groupId = this.chatData.key;
-            query.groupId = groupId;
-
-            const groupChatController: GroupChatDataController = app.appContext.getMaterial(GroupChatDataController);
-
-            const back = (p: Page, contents: MessageContentWrap[]) => {
-                own.setList(p, contents);
-            };
-            groupChatController.queryList(query, page, back);
-        }
-
-        public setList(page: Page, items: MessageContentWrap[]) {
-            this.page = page;
-            this.list = items;
-        }
+    public mounted() {
+        this.queryList();
     }
+
+    public pageChange() {
+        this.queryList();
+    }
+
+    public queryList() {
+        const own = this;
+        const page = this.page;
+        const query: GroupChatQuery = this.query;
+        const pb: PersonalBox = app.appContext.getMaterial(PersonalBox);
+        const groupId = this.chatData.key;
+        query.groupId = groupId;
+
+        const service: ContentItemHandleService = app.appContext.getMaterial(ContentItemHandleService);
+        const groupChatController: GroupChatDataController = app.appContext.getMaterial(GroupChatDataController);
+
+        const back = (p: Page, contents: MessageContentWrap[]) => {
+            if (service) {
+                for (const cd of contents) {
+                    service.handleContent(cd.content);
+                }
+            }
+            ContentWrapUtil.sort(contents);
+            own.setList(p, contents);
+        };
+        groupChatController.queryList(query, page, back);
+    }
+
+    public setList(page: Page, items: MessageContentWrap[]) {
+        this.page = page;
+        this.list = items;
+    }
+}
 </script>
 
 <style lang="scss">

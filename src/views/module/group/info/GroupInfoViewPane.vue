@@ -5,15 +5,21 @@
                 elevation="8"
                 dark
         >
-            <div class="user-info-card-top">
-                <v-list-item
-                        @click=""
-                >
-                    <back-button></back-button>
-                    <v-toolbar-title>{{ '群信息' }}</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                </v-list-item>
-            </div>
+            <v-parallax
+                    height="145"
+                    dark
+                    :src="infoBg"
+            >
+                <div class="user-info-card-top">
+                    <v-list-item
+                            @click=""
+                    >
+                        <back-button></back-button>
+                        <v-toolbar-title>{{ '群信息' }}</v-toolbar-title>
+                        <v-spacer></v-spacer>
+                    </v-list-item>
+                </div>
+            </v-parallax>
         </v-card>
 
         <div class="user-info-card-head">
@@ -149,6 +155,7 @@ import RouterUtil from '@/common/vue/RouterUtil';
     },
 })
 export default class GroupInfoCard extends Vue {
+    private infoBg: string = 'assets/general/wap/images/info/bg2.jpg';
     private model = groupInfoViewModel;
     private noLogo = CommonIcon.noLogo;
     private openDialog: boolean = false;
@@ -255,7 +262,11 @@ export default class GroupInfoCard extends Vue {
     }
 }
 </script>
-
+<style lang="scss">
+.v-parallax__content {
+    padding: 0;
+}
+</style>
 <style lang="scss">
 
 </style>

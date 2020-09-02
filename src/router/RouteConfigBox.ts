@@ -30,9 +30,14 @@ class RouteConfigBox {
                 component: () => import('@/views/module/personal/PersonalInfoPane.vue'),
             },
             {
-                path: '/personal.update',
-                name: 'personalUpdate',
-                component: () => import('@/views/module/personal/PersonalUpdatePane.vue'),
+                path: '/personal.update.info',
+                name: 'personalUpdateInfo',
+                component: () => import('@/views/module/personal/PersonalUpdateInfoPane.vue'),
+            },
+            {
+                path: '/personal.update.password',
+                name: 'personalUpdatePassword',
+                component: () => import('@/views/module/personal/PersonalUpdatePasswordPane.vue'),
             },
             {
                 path: '/query',
@@ -67,19 +72,19 @@ class RouteConfigBox {
             {
                 path: '/info.user/:userId',
                 name: 'userInfo',
-                component: () => import('@/views/module/card/UserInfoCard.vue'),
+                component: () => import('@/views/module/contact/info/ContactInfoViewPane.vue'),
                 props: true,
             },
             {
                 path: '/info.group/:groupId',
                 name: 'groupInfo',
-                component: () => import('@/views/module/card/GroupInfoCard.vue'),
+                component: () => import('@/views/module/group/info/GroupInfoViewPane.vue'),
                 props: true,
             },
             {
                 path: '/info.group.member.list/:groupId',
                 name: 'groupMemberList',
-                component: () => import('@/views/module/card/GroupMemberListPane.vue'),
+                component: () => import('@/views/module/group/member/GroupMemberListPane.vue'),
                 props: true,
             },
         ];
@@ -95,7 +100,7 @@ class RouteConfigBox {
     }
 
     private initialize(): void {
-       // no
+        // no
     }
 }
 

@@ -9,7 +9,7 @@
                 lazy-validation>
             <v-text-field
                     v-model="user.account"
-                    :counter="16"
+                    :counter="20"
                     :rules="rules.account"
                     :label="''"
                     :placeholder="'账号'"
@@ -20,7 +20,7 @@
             <v-text-field
                     v-model="user.password"
                     type="password"
-                    :counter="16"
+                    :counter="20"
                     :rules="rules.password"
                     :label="''"
                     :placeholder="'密码'"
@@ -30,7 +30,7 @@
             <v-text-field
                     v-model="user.repeatPassword"
                     type="password"
-                    :counter="16"
+                    :counter="20"
                     :rules="rules.confirmPassword"
                     :label="''"
                     :placeholder="'确认密码'"
@@ -80,7 +80,7 @@
         private rules = {
             account: [
                 (v: any) => !!v || '用户名不能为空',
-                (v: any) => (/^[\S]{4,16}$/.test(v) || '4-16位'),
+                (v: any) => (/^[\S]{4,20}$/.test(v) || '4-20位'),
                 (v: any) => (!/^[0-9]*$/.test(v) || '不能纯数字'),
                 (v: any) => (/^[\u4E00-\u9FA5-_A-Za-z0-9]+$/.test(v) || '4-16位字母数字组合或者字母、下划线'),
                 (v: any) => (!this.exist || '账号已存在'),
@@ -88,11 +88,11 @@
             password: [
                 (v: any) => !!v || '密码不能为空',
                 // /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/.test(v)
-                (v: any) => (/^[\S]{6,16}$/.test(v) || '6-16位'),
+                (v: any) => (/^[\S]{6,20}$/.test(v) || '6-20位'),
             ],
             confirmPassword: [
                 (v: any) => !!v || '密码不能为空',
-                (v: any) => (/^[\S]{6,16}$/.test(v) || '6-16位'),
+                (v: any) => (/^[\S]{6,20}$/.test(v) || '6-20位'),
                 (v: any) => (this.user.password === v || '两次密码不一致'),
             ],
         };

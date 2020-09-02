@@ -1,4 +1,3 @@
-
 import NodeData from '@/views/common/list/NodeData';
 import PinYinUtil from '@/platform/wap/util/PinYinUtil';
 import ItemData from '@/views/common/list/ItemData';
@@ -9,6 +8,7 @@ class ContactListPaneViewAppImpl extends ContactListPaneViewImpl {
 
     protected keyIndexNodeMap: Map<string, NodeData> = new Map<string, NodeData>();
     protected keyIndexNodes: NodeData[] = ListIndexData.userNodes;
+    protected keyIndexes = ListIndexData.userIndexes;
 
     public addOrUpdateItem(categoryId: string, itemId: string, name: string, avatar: string, gray: boolean): void {
         super.addOrUpdateItem(categoryId, itemId, name, avatar, gray);
@@ -88,6 +88,7 @@ class ContactListPaneViewAppImpl extends ContactListPaneViewImpl {
         const allNodes = this.listBox.nodes;
         const keyIndexNodeMap = this.keyIndexNodeMap;
         const keyIndexNodes = this.keyIndexNodes;
+        const keyIndexes = this.keyIndexes;
 
         keyIndexNodeMap.clear();
         keyIndexNodes.length = 0;
@@ -117,6 +118,12 @@ class ContactListPaneViewAppImpl extends ContactListPaneViewImpl {
             const bk = b.key;
             return ak.localeCompare(bk);
         });
+
+        keyIndexes.length = 0;
+
+        for (const n of keyIndexNodes) {
+            keyIndexes.push(n.key);
+        }
     }
 }
 

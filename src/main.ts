@@ -8,6 +8,7 @@ import './registerServiceWorker';
 import routerManager from './router/RouterManager';
 import store from './store';
 import vuetify from './plugins/vuetify';
+import './plugins/codemirror';
 
 import van from 'vant';
 import 'vant/lib/index.css';

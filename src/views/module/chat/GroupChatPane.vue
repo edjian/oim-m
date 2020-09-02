@@ -32,22 +32,22 @@
                 </v-list-item>
             </div>
         </v-card>
-        <div ref="messageListPane" @scroll="handleScroll" class="center scroll-wrapper scrollbar-dynamic">
-            <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-                <ReadPane :data="readMapper" :items="model.messageData.list"></ReadPane>
+        <div class="center">
+            <van-pull-refresh style="height: 100%" v-model="isLoading" @refresh="onRefresh">
+                <ReadPane :data="readMapper" :items="model.messageData.list"  @on-scroll="handleScroll"></ReadPane>
             </van-pull-refresh>
+        </div>
+        <div v-if='model.messageData.promptShow&&!model.atInfo.show' tabindex="-1">
+            <div class="prompt-message" @click="toMessageKeyView(model.messageData.promptKey)">
+                <div class="prompt-message-inner">
+                    {{model.messageData.promptText}}
+                </div>
+            </div>
         </div>
         <div v-if='model.atInfo.show' tabindex="-1">
             <div class="prompt-message" @click="toMessageKeyView(model.atInfo.messageKey)">
                 <div class="prompt-message-inner">
                     {{model.atInfo.chatUserName}}@我：{{model.atInfo.chatText}}
-                </div>
-            </div>
-        </div>
-        <div v-if='model.messageData.promptShow' tabindex="-1">
-            <div class="prompt-message" @click="toMessageKeyView(model.messageData.promptKey)">
-                <div class="prompt-message-inner">
-                    {{ model.messageData.promptText }}
                 </div>
             </div>
         </div>

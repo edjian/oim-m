@@ -153,7 +153,8 @@ body, html {
 .user-info-card-top {
     height: 145px;
     text-align: center;
-    background-color: #1abc9c;
+    /*background-color: #1abc9c;*/
+    background-color: rgba(120, 120, 255, 0.7);
     overflow: hidden;
 }
 
