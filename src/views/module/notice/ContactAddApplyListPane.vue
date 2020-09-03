@@ -29,10 +29,10 @@
                             </v-list-item-content>
                             <div v-if="item.apply.handleType==='0'">
                                 <v-btn icon @click="accept(item.apply)">
-                                    <v-icon>mdi-plus</v-icon>
+                                    <v-icon color="#05CA65">fas fa-check-circle</v-icon>
                                 </v-btn>
                                 <v-btn icon @click="reject(item.apply)">
-                                    <v-icon>mdi-plus</v-icon>
+                                    <v-icon color="#F54949">fas fa-times-circle</v-icon>
                                 </v-btn>
                             </div>
                         </v-list-item>
@@ -209,7 +209,7 @@ export default class ContactAddApplyListPane extends Vue {
 .action .attr {
     cursor: pointer;
     margin-top: 10px;
-    color: #1c4eec;
+    color: #05ca65;
     height: 19px;
     line-height: 1.5;
     font-size: 14px;

@@ -11,6 +11,10 @@ import WapGroupInfoViewImpl from '@/platform/wap/impl/view/WapGroupInfoViewImpl'
 import ContactListPaneViewImpl from '@/platform/vue/view/impl/ContactListPaneViewImpl';
 import ContactListPaneViewAppImpl from '@/platform/wap/impl/view/ContactListPaneViewAppImpl';
 import WapMessageAllUnreadViewImpl from '@/platform/wap/impl/view/WapMessageAllUnreadViewImpl';
+import ContactAddApplyListViewImpl from '@/platform/wap/view/impl/ContactAddApplyListViewImpl';
+import GroupInviteApplyListViewImpl from '@/platform/wap/view/impl/GroupInviteApplyListViewImpl';
+import GroupInviteeApplyListViewImpl from '@/platform/wap/view/impl/GroupInviteeApplyListViewImpl';
+import GroupJoinApplyListViewImpl from '@/platform/wap/view/impl/GroupJoinApplyListViewImpl';
 
 export default class WebPlatformComponentInitializer implements Initializer {
 
@@ -38,10 +42,10 @@ export default class WebPlatformComponentInitializer implements Initializer {
         appContext.putViewImpl(WorkViewEnum.ContactInfoView, WapContactInfoViewImpl);
         appContext.putViewImpl(WorkViewEnum.GroupInfoView, WapGroupInfoViewImpl);
         appContext.putViewImpl(WorkViewEnum.MessageAllUnreadView, WapMessageAllUnreadViewImpl);
-        // appContext.putViewImpl(WorkViewEnum.GroupInviteApplyListView, GroupInviteApplyListViewImpl);
-        // appContext.putViewImpl(WorkViewEnum.GroupInviteeApplyListView, GroupInviteeApplyListViewImpl);
-        // appContext.putViewImpl(WorkViewEnum.GroupJoinApplyListView, GroupJoinApplyListViewImpl);
-        // appContext.putViewImpl(WorkViewEnum.ContactAddApplyListView, ContactAddApplyListViewImpl);
+        appContext.putViewImpl(WorkViewEnum.GroupInviteApplyListView, GroupInviteApplyListViewImpl);
+        appContext.putViewImpl(WorkViewEnum.GroupInviteeApplyListView, GroupInviteeApplyListViewImpl);
+        appContext.putViewImpl(WorkViewEnum.GroupJoinApplyListView, GroupJoinApplyListViewImpl);
+        appContext.putViewImpl(WorkViewEnum.ContactAddApplyListView, ContactAddApplyListViewImpl);
     }
 
     public initializeFileIcon(appContext: AppContext) {

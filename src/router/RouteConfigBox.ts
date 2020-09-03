@@ -99,6 +99,12 @@ class RouteConfigBox {
                 component: () => import('@/views/module/notice/ContactAddApplyListPane.vue'),
                 props: true,
             },
+            {
+                path: '/notice.group.handle',
+                name: 'noticeGroupHandle',
+                component: () => import('@/views/module/notice/GroupHandlerTabPane.vue'),
+                props: true,
+            },
 
         ];
         this.initialize();
