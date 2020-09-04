@@ -111,11 +111,11 @@ export default class PersonalUpdatePane extends Vue {
             (v: any) => !!v || '不能为空',
         ],
         email: [
-            (v: any) => !!v || '不能为空',
+            // (v: any) => !!v || '不能为空',
             (v: any) => /.+@.+\..+/.test(v) || '格式不正确',
         ],
         mobile: [
-            (v: any) => !!v || '不能为空',
+            // (v: any) => !!v || '不能为空',
             (v: any) => /^1[3456789]\d{9}$/.test(v) || '格式不正确',
         ],
     };

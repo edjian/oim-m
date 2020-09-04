@@ -1,14 +1,14 @@
 <template>
     <div class="chat-pane">
         <v-card
-                class="mx-auto"
-                elevation="8"
-                dark
-                color="primary"
+            class="mx-auto"
+            elevation="8"
+            dark
+            color="primary"
         >
             <div>
                 <v-list-item
-                        @click=""
+                    @click=""
                 >
                     <back-button></back-button>
                     <v-toolbar-title>{{ model.info.name }}</v-toolbar-title>
@@ -16,14 +16,14 @@
                     <v-menu offset-y>
                         <template v-slot:activator="{ on }">
                             <v-btn
-                                    v-on="on"
-                                    icon>
+                                v-on="on"
+                                icon>
                                 <v-icon>mdi-dots-vertical</v-icon>
                             </v-btn>
                         </template>
                         <v-list>
                             <v-list-item
-                                    @click="openHistory"
+                                @click="openHistory"
                             >
                                 <v-list-item-title>聊天记录</v-list-item-title>
                             </v-list-item>
@@ -33,29 +33,31 @@
             </div>
         </v-card>
         <div class="center">
-            <van-pull-refresh style="height: 100%" v-model="isLoading" @refresh="onRefresh">
-                <ReadPane :data="readMapper" :items="model.messageData.list"  @on-scroll="handleScroll"></ReadPane>
-            </van-pull-refresh>
+            <ReadPane :data="readMapper"
+                      :items="model.messageData.list"
+                      @on-scroll="handleScroll"
+                      @on-refresh="onRefresh"
+            ></ReadPane>
         </div>
         <div v-if='model.messageData.promptShow&&!model.atInfo.show' tabindex="-1">
             <div class="prompt-message" @click="toMessageKeyView(model.messageData.promptKey)">
                 <div class="prompt-message-inner">
-                    {{model.messageData.promptText}}
+                    {{ model.messageData.promptText }}
                 </div>
             </div>
         </div>
         <div v-if='model.atInfo.show' tabindex="-1">
             <div class="prompt-message" @click="toMessageKeyView(model.atInfo.messageKey)">
                 <div class="prompt-message-inner">
-                    {{model.atInfo.chatUserName}}@我：{{model.atInfo.chatText}}
+                    {{ model.atInfo.chatUserName }}@我：{{ model.atInfo.chatText }}
                 </div>
             </div>
         </div>
         <div class="bottom">
             <write-pane
-                    :data="writeMapper"
-                    @on-send="send"
-                    @on-key-press='onKeyPress'>
+                :data="writeMapper"
+                @on-send="send"
+                @on-key-press='onKeyPress'>
 
             </write-pane>
             <!--                <span class="btn-mic"><i :class="'icon icon-' "></i></span>-->
@@ -154,9 +156,6 @@ export default class GroupChatPane extends Vue {
     private onRefresh() {
         const own = this;
         own.loadHistory();
-        setTimeout(() => {
-            own.isLoading = false;
-        }, 1000);
     }
 
     private handleScroll(info: { event: Event, scrollHeight: number, scrollTop: number, scrollPosition: string }) {

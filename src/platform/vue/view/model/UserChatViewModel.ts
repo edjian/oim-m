@@ -76,3 +76,4 @@ class UserChatViewModel extends ChatViewModel {
 
 const userChatViewModel: UserChatViewModel = new UserChatViewModel();
 export default userChatViewModel;
+

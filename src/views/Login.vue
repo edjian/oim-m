@@ -127,6 +127,7 @@ export default class Login extends Vue {
         loginViewModel.onLogin = this.onLogin;
         loginViewModel.initialize();
         loginViewModel.data.savePassword = true;
+        loginViewModel.data.autoLogin = true;
     }
 
 

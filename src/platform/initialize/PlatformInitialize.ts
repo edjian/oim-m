@@ -64,15 +64,15 @@ class PlatformInitialize {
     }
 
     private buildInitializerComponent() {
-        app.putInitializer(new AppInitializer());
+        app.appContext.getMaterial(AppInitializer);
 
-        app.putInitializer(new WebComponentInitializer());
+        app.appContext.getMaterial(WebComponentInitializer);
 
-        app.putInitializer(new WebPlatformComponentInitializer());
-        app.putInitializer(new WebPlatformFaceInitializer());
+        app.appContext.getMaterial(WebPlatformComponentInitializer);
+        app.appContext.getMaterial(WebPlatformFaceInitializer);
 
-        app.putInitializer(new CurrentComponentInitializer());
-        app.putInitializer(new CurrentPlatformInitializer());
+        app.appContext.getMaterial(CurrentComponentInitializer);
+        app.appContext.getMaterial(CurrentPlatformInitializer);
     }
 
     private initializeApp() {

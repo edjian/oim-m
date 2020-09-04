@@ -1,4 +1,3 @@
-import Initializer from '@/app/base/initialize/Initializer';
 import AppContext from '@/app/base/context/AppContext';
 import Prompter from '@/app/com/client/component/Prompter';
 import WebPromptHandlerImpl from '@/platform/wap/impl/WebPromptHandlerImpl';
@@ -15,11 +14,16 @@ import ContactAddApplyListViewImpl from '@/platform/wap/view/impl/ContactAddAppl
 import GroupInviteApplyListViewImpl from '@/platform/wap/view/impl/GroupInviteApplyListViewImpl';
 import GroupInviteeApplyListViewImpl from '@/platform/wap/view/impl/GroupInviteeApplyListViewImpl';
 import GroupJoinApplyListViewImpl from '@/platform/wap/view/impl/GroupJoinApplyListViewImpl';
+import LaunchInitializer from '@/app/base/initialize/LaunchInitializer';
 
-export default class WebPlatformComponentInitializer implements Initializer {
+export default class WebPlatformComponentInitializer extends LaunchInitializer {
 
     public getOrder(): number {
         return 0;
+    }
+
+    public initialize(): void {
+        this.initializeHandle(this.appContext);
     }
 
     public getKey(): string {
@@ -27,7 +31,7 @@ export default class WebPlatformComponentInitializer implements Initializer {
         return own.constructor.name;
     }
 
-    public initialize(appContext: AppContext): void {
+    public initializeHandle(appContext: AppContext): void {
         const prompter: Prompter = appContext.getMaterial(Prompter);
         prompter.setPromptHandler(new WebPromptHandlerImpl());
         this.initializeView(appContext);

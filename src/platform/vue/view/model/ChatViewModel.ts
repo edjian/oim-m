@@ -13,8 +13,6 @@ import MessageContentWrap from '@/common/vue/data/content/impl/message/MessageCo
 import FileNameUtil from '@/app/common/util/FileNameUtil';
 import PersonalBox from '@/app/com/main/module/business/personal/box/PersonalBox';
 import MessageStatusType from '@/common/vue/data/content/impl/message/MessageStatusType';
-import UserChatDataController from '@/app/com/main/module/business/chat/controller/UserChatDataController';
-import Page from '@/app/com/common/data/Page';
 import ContentItemHandleService from '@/common/web/content/service/ContentItemHandleService';
 
 export default class ChatViewModel extends ChatMessageModel {
@@ -96,10 +94,6 @@ export default class ChatViewModel extends ChatMessageModel {
         const isReceive = false;
         const isOwn = true;
         const messageKey = content.key;
-        const service: ContentItemHandleService = app.appContext.getMaterial(ContentItemHandleService);
-        if (service) {
-            content = service.convertContent(content);
-        }
         this.insertLast(isReceive, isOwn, key, showName, chatUser, content);
         const wrap: ContentWrap | undefined = this.getContentWrap(key, messageKey);
         if (wrap) {

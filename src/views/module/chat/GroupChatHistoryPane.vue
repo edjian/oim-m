@@ -1,14 +1,14 @@
 <template>
     <div class="chat-pane">
         <v-card
-                class="mx-auto"
-                elevation="8"
-                dark
-                color="primary"
+            class="mx-auto"
+            elevation="8"
+            dark
+            color="primary"
         >
             <div>
                 <v-list-item
-                        @click=""
+                    @click=""
                 >
                     <back-button></back-button>
                     <v-toolbar-title>{{ chatViewModel.info.name }}</v-toolbar-title>
@@ -17,15 +17,17 @@
             </div>
         </v-card>
         <div ref="messageListPane" class="center scroll-wrapper scrollbar-dynamic">
-            <ReadPane :items="list"></ReadPane>
+            <ReadPane :items="list"
+                      @on-refresh="nextPage"
+            ></ReadPane>
         </div>
         <div class="bottom">
             <div class="text-center" style="width: 100%">
                 <v-pagination
-                        v-model="page.number"
-                        :length="page.totalPage"
-                        @input="pageChange"
-                        circle
+                    v-model="page.number"
+                    :length="page.totalPage"
+                    @input="pageChange"
+                    circle
                 ></v-pagination>
             </div>
         </div>
@@ -64,6 +66,15 @@ export default class UserChatHistoryPane extends Vue {
 
     public mounted() {
         this.queryList();
+    }
+
+    private nextPage() {
+        const own = this;
+        const page = this.page;
+        if (page.number < page.totalPage) {
+            page.number++;
+            own.pageChange();
+        }
     }
 
     public pageChange() {

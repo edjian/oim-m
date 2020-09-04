@@ -1,14 +1,14 @@
 <template>
     <div class="chat-pane">
         <v-card
-                class="mx-auto"
-                elevation="8"
-                dark
-                color="primary"
+            class="mx-auto"
+            elevation="8"
+            dark
+            color="primary"
         >
             <div>
                 <v-list-item
-                        @click=""
+                    @click=""
                 >
                     <back-button></back-button>
                     <v-toolbar-title>{{ model.info.name }}</v-toolbar-title>
@@ -16,14 +16,14 @@
                     <v-menu offset-y>
                         <template v-slot:activator="{ on }">
                             <v-btn
-                                    v-on="on"
-                                    icon>
+                                v-on="on"
+                                icon>
                                 <v-icon>mdi-dots-vertical</v-icon>
                             </v-btn>
                         </template>
                         <v-list>
                             <v-list-item
-                                    @click="openHistory"
+                                @click="openHistory"
                             >
                                 <v-list-item-title>聊天记录</v-list-item-title>
                             </v-list-item>
@@ -33,9 +33,12 @@
             </div>
         </v-card>
         <div class="center">
-            <van-pull-refresh style="height: 100%" v-model="isLoading" @refresh="onRefresh">
-                <ReadPane :data="readMapper" :items="model.messageData.list" @on-scroll="handleScroll"></ReadPane>
-            </van-pull-refresh>
+            <ReadPane :data="readMapper"
+                      :items="model.messageData.list"
+                      @on-scroll="handleScroll"
+                      @on-refresh="onRefresh"
+            >
+            </ReadPane>
         </div>
         <div v-if='model.messageData.promptShow' tabindex="-1">
             <div class="prompt-message" @click="toMessageKeyView(model.messageData.promptKey)">
@@ -46,14 +49,15 @@
         </div>
         <div class="bottom">
             <write-pane
-                    :data="writeMapper"
-                    @on-send="send"
-                    @on-key-press='onKeyPress'>
+                :data="writeMapper"
+                @on-send="send"
+                @on-key-press='onKeyPress'>
 
             </write-pane>
             <!--                <span class="btn-mic"><i :class="'icon icon-' "></i></span>-->
             <!--            <input v-model="text" class="message-input" @keyup.enter="send"/>-->
             <!--            <v-btn class="button-send" small @click="send">{{'发送'}}</v-btn>-->
+<!--            <FacePane></FacePane>-->
         </div>
 
     </div>
@@ -64,6 +68,8 @@ import {Component, Emit, Inject, Model, Prop, Provide, Vue, Watch} from 'vue-pro
 import BackButton from '@/views/module/common/BackButton.vue';
 import WritePane from '@/views/component/chat/WritePane.vue';
 import ReadPane from '@/views/component/chat/ReadPane.vue';
+
+import FacePane from '@/views/main/face/FacePane.vue';
 
 import userChatViewModel from '@/platform/vue/view/model/UserChatViewModel';
 import app from '@/app/App';
@@ -86,6 +92,7 @@ import PromptType from '@/app/com/client/define/prompt/PromptType';
         BackButton,
         WritePane,
         ReadPane,
+        FacePane,
     },
 })
 export default class UserChatPane extends Vue {
@@ -146,9 +153,6 @@ export default class UserChatPane extends Vue {
     private onRefresh() {
         const own = this;
         own.loadHistory();
-        setTimeout(() => {
-            own.isLoading = false;
-        }, 1000);
     }
 
     private handleScroll(info: { event: Event, scrollHeight: number, scrollTop: number, scrollPosition: string }) {
@@ -207,6 +211,6 @@ export default class UserChatPane extends Vue {
 
 <style lang="scss">
 .chat-pane {
-  height: 100%;
+    height: 100%;
 }
 </style>

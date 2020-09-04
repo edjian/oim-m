@@ -8,7 +8,7 @@
                 dark
         >
 
-            <v-parallax
+            <v-img
                     height="145"
                     dark
                     :src="infoBg"
@@ -22,7 +22,7 @@
                         <v-spacer></v-spacer>
                     </v-list-item>
                 </div>
-            </v-parallax>
+            </v-img>
         </v-card>
 
         <div class="personal-head">

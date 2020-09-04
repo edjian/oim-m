@@ -8,7 +8,6 @@
             <back-button></back-button>
             <v-tabs
                     v-model="model.tab"
-                    fixed-tabs
             >
                 <v-tabs-slider></v-tabs-slider>
                 <v-tab

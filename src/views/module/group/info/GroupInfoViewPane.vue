@@ -1,25 +1,26 @@
 <template>
     <div class="common-main-scroll-pane">
         <v-card
-                class="mx-auto"
-                elevation="8"
-                dark
+            class="mx-auto"
+            elevation="8"
+            dark
         >
-            <v-parallax
-                    height="145"
-                    dark
-                    :src="infoBg"
+            <v-img
+                height="145"
+                max-height="145"
+                dark
+                :src="infoBg"
             >
                 <div class="user-info-card-top">
                     <v-list-item
-                            @click=""
+                        @click=""
                     >
                         <back-button></back-button>
                         <v-toolbar-title>{{ '群信息' }}</v-toolbar-title>
                         <v-spacer></v-spacer>
                     </v-list-item>
                 </div>
-            </v-parallax>
+            </v-img>
         </v-card>
 
         <div class="user-info-card-head">
@@ -36,8 +37,8 @@
             <v-card>
                 <v-list>
                     <v-list-item
-                            @click=""
-                            two-line
+                        @click=""
+                        two-line
                     >
                         <v-list-item-content>
                             <v-list-item-title>{{ '备注' }}</v-list-item-title>
@@ -51,8 +52,8 @@
                     </v-list-item>
                     <v-divider></v-divider>
                     <v-list-item
-                            @click=""
-                            two-line
+                        @click=""
+                        two-line
                     >
                         <v-list-item-content>
                             <v-list-item-title>{{ '群号' }}</v-list-item-title>
@@ -61,8 +62,8 @@
                     </v-list-item>
                     <v-divider></v-divider>
                     <v-list-item
-                            @click=""
-                            two-line
+                        @click=""
+                        two-line
                     >
                         <v-list-item-content>
                             <v-list-item-title>{{ '介绍' }}</v-list-item-title>
@@ -80,10 +81,10 @@
             <v-card>
                 <v-col>
                     <v-btn
-                            ref="button"
-                            block
-                            color="primary"
-                            @click="openSend"
+                        ref="button"
+                        block
+                        color="primary"
+                        @click="openSend"
                     >
                         发送消息
                     </v-btn>
@@ -92,8 +93,8 @@
         </div>
 
         <v-dialog
-                v-model="openDialog"
-                max-width="500px"
+            v-model="openDialog"
+            max-width="500px"
         >
             <v-card>
                 <v-card-title>
@@ -101,22 +102,22 @@
                 </v-card-title>
                 <v-card-text>
                     <v-text-field
-                            v-model="remark"
-                            :placeholder="'备注名'"
-                            required
+                        v-model="remark"
+                        :placeholder="'备注名'"
+                        required
                     ></v-text-field>
                 </v-card-text>
                 <v-card-actions>
                     <v-btn
-                            text
-                            @click="openDialog = false"
+                        text
+                        @click="openDialog = false"
                     >
                         取消
                     </v-btn>
                     <v-btn
-                            color="primary"
-                            text
-                            @click="updateRemark"
+                        color="primary"
+                        text
+                        @click="updateRemark"
                     >
                         确定
                     </v-btn>

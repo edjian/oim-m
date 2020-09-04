@@ -1,21 +1,36 @@
 <template>
-    <div class="message-input-area">
-        <div>
-            <pre ref='inputArea' class="message-input" @paste.capture.prevent=""
-                 @keypress="onKeypress"
-                 @keyup="onKeyup"
-                 contenteditable="true"></pre>
+    <div>
+        <div class="input-edit-top">
+            <div class="top">
+                <pre ref='inputArea' class="message-input" @paste.capture.prevent=""
+                     @keypress="onKeypress"
+                     @keyup="onKeyup"
+                     contenteditable="true"/>
+                <div class="icon-button">
+                    <v-btn @click="send" icon>
+                        <v-icon title="发送">mdi-send</v-icon>
+                    </v-btn>
+                    <v-btn @click="openFace" icon>
+                        <v-icon title="表情">mdi-face</v-icon>
+                    </v-btn>
+                    <v-btn icon>
+                        <van-uploader :after-read="afterRead" capture="">
+                            <v-icon title="发送">mdi-folder-image</v-icon>
+                        </van-uploader>
+                    </v-btn>
+                </div>
+            </div>
         </div>
-
-        <v-btn class="button-send" small @click="send">{{ '发送' }}</v-btn>
-        <van-uploader :after-read="afterRead" class="image-send" capture="">
-            <van-icon name="photo" size="40"/>
-        </van-uploader>
+        <div class="input-edit-bottom">
+            <slot v-show="!showFace"></slot>
+            <face-pane v-show="showFace" @on-selected="onFaceSelected"></face-pane>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
 import {Component, Emit, Inject, Model, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
+
 
 import app from '@/app/App';
 import {ServerType, Protocol} from '@/app/common/config/constant/ServerConstant';
@@ -39,10 +54,14 @@ import ServerController from '@/app/com/main/module/business/server/controller/S
 import ContentUploadImageService from '@/app/com/main/module/support/file/service/ContentUploadImageService';
 import UploadResult from '@/app/com/main/module/support/file/data/UploadResult';
 import DocumentUtil from '@/common/web/util/DocumentUtil';
+import FacePane from '@/views/main/face/FacePane.vue';
+import FaceImageUtil from '@/common/web/common/face/FaceImageUtil';
 
 
 @Component({
-    components: {},
+    components: {
+        FacePane,
+    },
 })
 export default class WritePane extends Vue {
 
@@ -59,6 +78,8 @@ export default class WritePane extends Vue {
         default: () => (new WriteMapper()),
     })
     private data!: WriteMapper;
+
+    private showFace = false;
 
     public mounted() {
         this.initialize();
@@ -172,6 +193,12 @@ export default class WritePane extends Vue {
         facePane.setShow(true);
     }
 
+    private onFaceSelected(face: FaceItem) {
+        if (face) {
+            const html = FaceImageUtil.createFaceImageHtml(face);
+            this.insertHtmlAtCursor(html);
+        }
+    }
 
     private send() {
         const own = this;
@@ -308,6 +335,9 @@ export default class WritePane extends Vue {
         }
     }
 
+    private openFace() {
+        this.showFace = !this.showFace;
+    }
 
     @Emit('on-send')
     private onSend(content: Content) {
@@ -337,48 +367,71 @@ export default class WritePane extends Vue {
 
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+
+.input-edit-top {
+    .top {
+        display: flex;
+        justify-content: center;
+        padding: 5px 10px;
+    }
+
+    .icon-button {
+        display: inline-block;
+        margin-left: 12px;
+        vertical-align: top;
+    }
+}
+
+.input-edit-middle {
+
+}
+
+.input-edit-bottom {
+
+}
+
 .message-input-area {
-  display: inline;
-  min-height: 48px;
-  width: 100%;
-  border-top: 1px solid #d6d6d6;
-  position: absolute;
-  right: 0;
-  /*bottom: 0;*/
-  left: 0;
-  background-color: #eee;
+    display: inline;
+    min-height: 48px;
+    width: 100%;
+    border-top: 1px solid #d6d6d6;
+    position: absolute;
+    right: 0;
+    /*bottom: 0;*/
+    left: 0;
+    background-color: #eee;
 }
 
 .message-input {
-  width: calc(100% - 180px);
-  /*height: 30px;*/
-  position: absolute;
-  top: 9px;
-  /*bottom: 9px;*/
-  left: 50px;
-  outline: none;
-  border: 1px solid;
-  border-radius: 5px;
-  color: #aaa;
-  margin: 0;
-  padding: 0;
-  overflow-y: auto;
-  max-height: 150px;
-  min-height: 30px;
+    width: calc(100% - 130px);
+    /*height: 30px;*/
+    //position: absolute;
+    top: 9px;
+    /*bottom: 9px;*/
+    left: 50px;
+    outline: none;
+    border: 1px solid;
+    border-radius: 5px;
+    color: #aaa;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    max-height: 150px;
+    min-height: 30px;
 }
 
 .button-send {
-  position: absolute;
-  right: 60px;
-  top: 8px;
-  width: 60px;
+    position: absolute;
+    right: 60px;
+    top: 8px;
+    width: 60px;
 }
 
 .image-send {
-  position: absolute;
-  right: 8px;
-  top: 2px;
-  width: 42px;
+    position: absolute;
+    right: 8px;
+    top: 2px;
+    width: 42px;
 }
 </style>
