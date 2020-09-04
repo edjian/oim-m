@@ -7,7 +7,6 @@ import EnterInitializerBox from '@/app/base/initialize/EnterInitializerBox';
 
 export default abstract class AbstractMessageUnreadBox extends AbstractMaterial implements BaseInitializer {
 
-
     private map: Map<string, number> = new Map<string, number>();
     private totalUnreadCount: number = 0;
 

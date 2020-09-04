@@ -56,6 +56,7 @@ import UploadResult from '@/app/com/main/module/support/file/data/UploadResult';
 import DocumentUtil from '@/common/web/util/DocumentUtil';
 import FacePane from '@/views/main/face/FacePane.vue';
 import FaceImageUtil from '@/common/web/common/face/FaceImageUtil';
+import FaceItem from '@/app/com/main/module/support/face/data/FaceItem';
 
 
 @Component({
