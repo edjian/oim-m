@@ -1,5 +1,5 @@
 <template>
-    <div class="face-pane">
+    <div class="face-pane" unselectable="on" onmousedown="return false;">
         <v-tabs
             v-model="tab"
             height="25"

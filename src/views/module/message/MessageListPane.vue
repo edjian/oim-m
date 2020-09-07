@@ -32,7 +32,7 @@
 <script lang="ts">
 import {Component, Emit, Inject, Model, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
 
-import MessageRefreshPane from '@/views/module/list/MessageRefreshPane.vue';
+import MessageRefreshPane from '@/views/module/message/MessageRefreshPane.vue';
 
 import IconItem from '@/views/common/list/IconItem.vue';
 import IconListPane from '../../common/list/IconListPane.vue';

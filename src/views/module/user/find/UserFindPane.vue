@@ -20,21 +20,21 @@
         </div>
         <div class="center">
             <v-list>
-                <template v-for="(data, i) in list">
+                <template v-for="(item, i) in list">
                     <v-card>
                         <v-list-item
-                            :key="data.id"
+                            :key="item.id"
                             @click=""
                         >
                             <v-avatar>
-                                <v-img :src="data.avatar"></v-img>
+                                <v-img :src="item.avatar"></v-img>
                             </v-avatar>
                             <div style="width: 15px;"></div>
                             <v-list-item-content>
-                                <v-list-item-title>{{ data.nickname }}({{ data.account }})</v-list-item-title>
-                                <v-list-item-subtitle>{{ data.signature }}</v-list-item-subtitle>
+                                <v-list-item-title>{{ item.nickname }}({{ item.account }})</v-list-item-title>
+                                <v-list-item-subtitle>{{ item.signature }}</v-list-item-subtitle>
                             </v-list-item-content>
-                            <v-btn icon>
+                            <v-btn @click="handleAddUser(item.id)" icon>
                                 <v-icon>mdi-plus</v-icon>
                             </v-btn>
                         </v-list-item>
@@ -52,6 +52,7 @@
                 ></v-pagination>
             </div>
         </div>
+        <ContactAddApply ref="addUserView"></ContactAddApply>
     </div>
 </template>
 
@@ -69,9 +70,12 @@ import DataBackAction from '@/app/base/net/DataBackAction';
 import Prompt from '@/platform/wap/common/Prompt';
 import UserInfoUtil from '@/app/com/main/common/util/UserInfoUtil';
 
+import ContactAddApply from '@/views/module/contact/apply/ContactAddApply.vue';
+
 @Component({
     components: {
         BackButton,
+        ContactAddApply,
     },
 })
 export default class UserQueryPane extends Vue {
@@ -142,6 +146,14 @@ export default class UserQueryPane extends Vue {
             UserInfoUtil.handleAvatar(user);
         }
         this.list = list;
+    }
+
+
+    private handleAddUser(userId: string) {
+        const addUserViewName = 'addUserView';
+        const addUserView: any = this.$refs[addUserViewName];
+        addUserView.setUserId(userId);
+        addUserView.setShow(true);
     }
 
     public mounted() {

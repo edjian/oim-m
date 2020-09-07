@@ -71,6 +71,7 @@
                 ></v-pagination>
             </div>
         </div>
+        <ContactAddApplyAccept ref="acceptContactAddApply"></ContactAddApplyAccept>
     </div>
 </template>
 
@@ -91,9 +92,12 @@ import ContactAddHandleData from '@/app/com/main/module/business/contact/data/Co
 import ContactAddApplyQuery from '@/app/com/main/module/business/contact/data/ContactAddApplyQuery';
 import ContactAddApplyController from '@/app/com/main/module/business/contact/controller/ContactAddApplyController';
 
+import ContactAddApplyAccept from '@/views/module/notice/ContactAddApplyAccept.vue';
+
 @Component({
     components: {
         BackButton,
+        ContactAddApplyAccept,
     },
 })
 export default class ContactAddApplyListPane extends Vue {

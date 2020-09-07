@@ -1,37 +1,33 @@
 <template>
     <div>
         <v-toolbar
-                color="primary"
-                dark
+            color="primary"
+            dark
         >
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
             <v-toolbar-title>联系人</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn icon>
-                <v-icon>mdi-magnify</v-icon>
-            </v-btn>
-
             <v-menu offset-y>
                 <template v-slot:activator="{ on }">
                     <v-btn
-                            v-on="on"
-                            icon>
+                        v-on="on"
+                        icon>
                         <v-icon>mdi-plus</v-icon>
                     </v-btn>
                 </template>
                 <v-list>
                     <v-list-item
-                            @click="findUser"
+                        @click="findUser"
                     >
                         <v-list-item-title>添加联系人</v-list-item-title>
                     </v-list-item>
                     <v-list-item
-                            @click="findGroup"
+                        @click="findGroup"
                     >
                         <v-list-item-title>查找群</v-list-item-title>
                     </v-list-item>
                     <v-list-item
-                            @click=""
+                        @click=""
                     >
                         <v-list-item-title>发起群聊</v-list-item-title>
                     </v-list-item>
@@ -43,7 +39,7 @@
             <v-list dense>
                 <v-list-item-group color="primary">
                     <v-list-item
-                            @click="noticeContactAddApplyList"
+                        @click="noticeContactAddApplyList"
                     >
                         <v-list-item-icon>
                             <v-icon>mdi-account</v-icon>
@@ -53,7 +49,7 @@
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item
-                            @click="noticeGroupHandle"
+                        @click="noticeGroupHandle"
                     >
                         <v-list-item-icon>
                             <v-icon>group</v-icon>
@@ -66,8 +62,8 @@
             </v-list>
         </v-card>
         <v-tabs
-                v-model="contactNav.active"
-                height="40"
+            v-model="contactNav.active"
+            height="40"
         >
             <v-tab :key="'0'"
             >

@@ -20,21 +20,21 @@
         </div>
         <div class="center">
             <v-list>
-                <template v-for="(data, i) in list">
+                <template v-for="(item, i) in list">
                     <v-card>
                         <v-list-item
-                            :key="data.id"
+                            :key="item.id"
                             @click=""
                         >
                             <v-avatar>
-                                <v-img :src="data.avatar"></v-img>
+                                <v-img :src="item.avatar"></v-img>
                             </v-avatar>
                             <div style="width: 15px;"></div>
                             <v-list-item-content>
-                                <v-list-item-title>{{ data.name }}({{ data.number }})</v-list-item-title>
-                                <v-list-item-subtitle>{{ data.introduce }}</v-list-item-subtitle>
+                                <v-list-item-title>{{ item.name }}({{ item.number }})</v-list-item-title>
+                                <v-list-item-subtitle>{{ item.introduce }}</v-list-item-subtitle>
                             </v-list-item-content>
-                            <v-btn icon>
+                            <v-btn @click="handleJoinGroup(item.id)" icon>
                                 <v-icon>mdi-plus</v-icon>
                             </v-btn>
                         </v-list-item>
@@ -52,6 +52,7 @@
                 ></v-pagination>
             </div>
         </div>
+        <GroupJoin ref="joinGroupView"></GroupJoin>
     </div>
 </template>
 
@@ -68,9 +69,12 @@ import DataBackAction from '@/app/base/net/DataBackAction';
 import Prompt from '@/platform/wap/common/Prompt';
 import GroupInfoUtil from '@/app/com/main/common/util/GroupInfoUtil';
 
+import GroupJoin from '@/views/module/group/find/GroupJoin.vue';
+
 @Component({
     components: {
         BackButton,
+        GroupJoin,
     },
 })
 export default class GroupFindPane extends Vue {
@@ -145,6 +149,13 @@ export default class GroupFindPane extends Vue {
             GroupInfoUtil.handleAvatar(group);
         }
         this.list = list;
+    }
+
+    private handleJoinGroup(groupId: string) {
+        const joinGroupViewName = 'joinGroupView';
+        const joinGroupView: any = this.$refs[joinGroupViewName];
+        joinGroupView.setGroupId(groupId);
+        joinGroupView.setShow(true);
     }
 }
 </script>

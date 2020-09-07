@@ -36,7 +36,7 @@
 import {Component, Emit, Inject, Model, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
 import mainViewData from '@/platform/wap/view/data/MainViewData';
 import mainBaseTabs from '@/platform/wap/view/data/MainBaseTabs';
-import MessageListPane from '@/views/module/list/MessageListPane.vue';
+import MessageListPane from '@/views/module/message/MessageListPane.vue';
 import ContactListNavPane from '@/views/main/list/ContactListNavPane.vue';
 import ProfilePane from '@/views/main/me/ProfilePane.vue';
 

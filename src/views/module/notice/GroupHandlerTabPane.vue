@@ -1,27 +1,28 @@
 <template>
     <v-card class="query-pane">
         <v-app-bar
-                dark
-                dense
-                color="deep-purple primary"
+            show-arrows
+            dark
+            dense
+            color="deep-purple primary"
         >
             <back-button></back-button>
             <v-tabs
-                    v-model="model.tab"
+                v-model="model.tab"
             >
                 <v-tabs-slider></v-tabs-slider>
                 <v-tab
-                        :key="type.GroupJoinApplyListView"
+                    :key="type.GroupJoinApplyListView"
                 >
                     群申请加入验证
                 </v-tab>
                 <v-tab
-                        :key="type.GroupInviteApplyListView"
+                    :key="type.GroupInviteApplyListView"
                 >
                     群邀请加入验证
                 </v-tab>
                 <v-tab
-                        :key="type.GroupInviteeApplyListView"
+                    :key="type.GroupInviteeApplyListView"
                 >
                     群被邀请加入处理
                 </v-tab>
@@ -30,17 +31,17 @@
         <div class="center pane">
             <v-tabs-items :value="model.tab">
                 <v-tab-item
-                        :value="type.GroupJoinApplyListView"
+                    :value="type.GroupJoinApplyListView"
                 >
                     <group-join-apply-list-pane></group-join-apply-list-pane>
                 </v-tab-item>
                 <v-tab-item
-                        :value="type.GroupInviteApplyListView"
+                    :value="type.GroupInviteApplyListView"
                 >
                     <group-invite-apply-list-pane></group-invite-apply-list-pane>
                 </v-tab-item>
                 <v-tab-item
-                        :value="type.GroupInviteeApplyListView"
+                    :value="type.GroupInviteeApplyListView"
                 >
                     <group-invitee-apply-list-pane></group-invitee-apply-list-pane>
                 </v-tab-item>

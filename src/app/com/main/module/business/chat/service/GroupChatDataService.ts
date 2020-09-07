@@ -72,9 +72,7 @@ export default class GroupChatDataService extends AbstractMaterial {
 
                 group = groupBox.getGroup(groupId);
 
-
                 UserInfoUtil.handleAvatar(chatUser);
-
 
                 const contentId: string = content.id;
                 const messageKey = content.key;
@@ -86,6 +84,7 @@ export default class GroupChatDataService extends AbstractMaterial {
                 contentData.id = contentId;
                 contentData.content = content;
                 contentData.name = showName;
+                contentData.avatar = chatUser.avatar;
                 contentData.user = chatUser;
                 contentData.isOwn = isOwn;
                 contentData.timeVisible = true;
