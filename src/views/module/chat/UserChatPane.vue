@@ -57,7 +57,7 @@
             <!--                <span class="btn-mic"><i :class="'icon icon-' "></i></span>-->
             <!--            <input v-model="text" class="message-input" @keyup.enter="send"/>-->
             <!--            <v-btn class="button-send" small @click="send">{{'发送'}}</v-btn>-->
-<!--            <FacePane></FacePane>-->
+            <!--            <FacePane></FacePane>-->
         </div>
 
     </div>
@@ -177,7 +177,7 @@ export default class UserChatPane extends Vue {
 
 
     public openHistory() {
-        RouterUtil.toByPath('/chat.group.history');
+        RouterUtil.toByPath('/chat.user.history');
     }
 
     private send(content: Content) {
@@ -212,5 +212,15 @@ export default class UserChatPane extends Vue {
 <style lang="scss">
 .chat-pane {
     height: 100%;
+}
+
+.prompt-message {
+    background-color: #d7d7d7;
+    z-index: 1024;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
 }
 </style>

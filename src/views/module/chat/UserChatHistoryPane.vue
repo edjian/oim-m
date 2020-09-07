@@ -11,7 +11,7 @@
                     @click=""
                 >
                     <back-button></back-button>
-                    <v-toolbar-title>{{ chatData.name }}</v-toolbar-title>
+                    <v-toolbar-title>{{ chatViewModel.info.name }}</v-toolbar-title>
                     <v-spacer></v-spacer>
                 </v-list-item>
             </div>
@@ -47,6 +47,7 @@ import MessageContentWrap from '@/common/vue/data/content/impl/message/MessageCo
 import userChatViewModel from '@/platform/vue/view/model/UserChatViewModel';
 import ContentItemHandleService from '@/common/web/content/service/ContentItemHandleService';
 import ContentWrapUtil from '@/common/vue/data/content/util/ContentWrapUtil';
+import groupChatViewModel from '@/platform/vue/view/model/GroupChatViewModel';
 
 @Component({
     components: {
@@ -55,7 +56,7 @@ import ContentWrapUtil from '@/common/vue/data/content/util/ContentWrapUtil';
     },
 })
 export default class UserChatHistoryPane extends Vue {
-
+    private chatViewModel = userChatViewModel;
     private list: MessageContentWrap[] = [];
     private page: Page = new Page();
     private query: UserChatQuery = new UserChatQuery();

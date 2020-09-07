@@ -21,6 +21,7 @@
                     >
                         <div class="face">
                             <template v-for="face of item.faces">
+
                                 <a v-if="face.visible" :title="face.text" @click="onFace(face)"
                                    :style="getWarpSize(face)">
                                     <img :src="face.path" :title="face.text" :style="getImageSize(face)"

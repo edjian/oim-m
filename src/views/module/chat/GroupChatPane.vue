@@ -173,6 +173,7 @@ export default class GroupChatPane extends Vue {
     }
 
     private toMessageKeyView(messageKey: string) {
+        this.model.atInfo.show = false;
         if (messageKey) {
             this.readMapper.updateScrollIntoView(messageKey);
         }
@@ -213,5 +214,13 @@ export default class GroupChatPane extends Vue {
 </script>
 
 <style lang="scss">
-
+.prompt-message {
+    background-color: #d7d7d7;
+    z-index: 1024;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+}
 </style>

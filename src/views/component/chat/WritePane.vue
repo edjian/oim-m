@@ -23,7 +23,9 @@
         </div>
         <div class="input-edit-bottom">
             <slot v-show="!showFace"></slot>
-            <face-pane v-show="showFace" @on-selected="onFaceSelected"></face-pane>
+            <v-lazy>
+                <face-pane v-show="showFace" @on-selected="onFaceSelected"></face-pane>
+            </v-lazy>
         </div>
     </div>
 </template>
